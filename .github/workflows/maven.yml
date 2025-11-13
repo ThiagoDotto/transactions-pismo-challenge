@@ -28,16 +28,11 @@ jobs:
         distribution: 'temurin'
         cache: maven
 
-    - name: Inicia Banco
-      run: docker compose up -d db
-
-    - name: Esperar resposta do DB
-      run: |
-        docker pull vishnubob/wait-for-it
-        docker run --rm --network host vishnubob/wait-for-it localhost:5433 --timeout=60 -- echo "Database is up and running!"
+    - name: Inicia Banco de Testes
+      run: docker compose up -d test
 
     - name: Build with Maven
-      run: mvn -B package --file pom.xml -DskipTests=true
+      run: mvn -B package --file pom.xml
 
       # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
     - name: Update dependency graph
