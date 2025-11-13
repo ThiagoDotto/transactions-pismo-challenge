@@ -32,7 +32,7 @@ jobs:
       run: docker compose up -d db
 
     - name: Esperar resposta do DB
-      run:run: |
+      run: |
         docker pull vishnubob/wait-for-it
         docker run --rm --network host vishnubob/wait-for-it localhost:5433 --timeout=60 -- echo "Database is up and running!"
 
